@@ -4,7 +4,6 @@ import axios from "axios";
 import GeneralSideBar from '../Components/GeneralSidebar.js';
 import styles from '../styles/pdfsummarizer.module.css'
 import jsPDF from 'jspdf';
-// import { useSpeechRecognition } from 'react-speech-recognition';
 
 const pdfsummarizer = () => {
     const [messages, setMessages] = useState([
@@ -39,6 +38,26 @@ const pdfsummarizer = () => {
         setFile(selectedFile);
     };
 
+    // const saveChatAsPDF = () => {
+    //     const pdf = new jsPDF();
+    
+    //     // Define the starting y-coordinate for the text
+    //     let y = 10;
+    
+    //     // Iterate through messages and add them to the PDF
+    //     messages.forEach((message) => {
+    //         const formattedMessage = `${message.sender}: ${message.text}`;
+    //         pdf.text(formattedMessage, 10, y);
+    //         y += 10; // Increment the y-coordinate for the next line
+    //       });
+      
+    //       // Save the PDF with a filename based on the current date and time
+    //       const currentDate = new Date();
+    //       const fileName = `chat_data_${currentDate.toISOString()}.pdf`;
+      
+    //       pdf.save(fileName);
+    //   };
+
     const saveChatAsPDF = () => {
         const pdf = new jsPDF();
     
@@ -48,16 +67,22 @@ const pdfsummarizer = () => {
         // Iterate through messages and add them to the PDF
         messages.forEach((message) => {
             const formattedMessage = `${message.sender}: ${message.text}`;
-            pdf.text(formattedMessage, 10, y);
-            y += 10; // Increment the y-coordinate for the next line
-          });
-      
-          // Save the PDF with a filename based on the current date and time
-          const currentDate = new Date();
-          const fileName = `chat_data_${currentDate.toISOString()}.pdf`;
-      
-          pdf.save(fileName);
-      };
+            const textLines = pdf.splitTextToSize(formattedMessage, pdf.internal.pageSize.width - 20);
+    
+            // Calculate the height of the text and adjust the y-coordinate
+            const lineHeight = 5; // Adjust this value as needed
+            const textHeight = textLines.length * lineHeight;
+            pdf.text(textLines, 10, y);
+            y += textHeight + 5; // Increment the y-coordinate with additional spacing
+        });
+    
+        // Save the PDF with a filename based on the current date and time
+        const currentDate = new Date();
+        const fileName = `chat_data_${currentDate.toISOString()}.pdf`;
+    
+        pdf.save(fileName);
+    };
+    
 
     return (
         <>
