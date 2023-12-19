@@ -8,9 +8,14 @@
     width: auto;
     border: 1px solid #ccc;
     background-color: transparent;
+    margin: 0px;
+    padding: 0px;
     border-radius: 5px;
-    overflow: hidden;
     height: 100vh;
+  }
+  .top_section_options button{
+    padding: 0.6rem;
+    cursor: pointer;
   }
   
   .chat_messages {
@@ -27,12 +32,13 @@
   }
   
   .user {
-    background-color: #12AA8C;
+    background-color: #625A75;
     align-self: flex-end; 
+    color: white;
   }
   
   .bot {
-    background-color: #87D67D;
+    background-color: white;
     align-self: flex-start; 
   }
   
@@ -43,7 +49,7 @@
     bottom: 5px;
     width: 80%;
   }
- .summarizer input {
+ .chat_bot_container input {
     flex: 1;
     margin-right: 10px;
     padding: 1rem;
@@ -51,7 +57,7 @@
     border-radius: 5px;
   }
   
- .summarizer button {
+ .chat_bot_container button {
     padding: 8px;
     border: none;
     border-radius: 5px;
@@ -60,7 +66,25 @@
     cursor: pointer;
   }
   
- .summarizer button:hover {
+ .chat_bot_container button:hover {
     background-color: #45a049;
   }
-  
+  .top_chat_section{
+    padding: 1rem;
+    font-weight: 700;
+    font-size: 1.2rem;
+    position: fixed;
+    background-color: #8E7797;
+    width: 84%;
+    border-radius: 0.3rem;
+    display: flex;
+    align-items: center ;
+    justify-content: space-between;
+  }
+  .text_input{
+    flex: 8;
+  }
+  .file_input{
+    background-color: white;
+    flex: 2;
+  }
